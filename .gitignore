@@ -1,0 +1,43 @@
+# Node modules and OS junk
+node_modules/
+.DS_Store
+Thumbs Away.iml
+
+# VSCode, JetBrains, and IDE folders
+.vscode/
+.idea/
+
+# Output and build artifacts
+dist/
+out/
+build/
+*.crx
+*.zip
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Chrome extension sync/session junk
+chrome-profile/
+
+# System
+Thumbs Away.code-workspace
+
+# Ignore user custom styles (if any)
+styles/*.custom.css
+
+# Ignore secrets if accidentally added (not used here, precaution)
+secrets.*
+.env
+.env.*
+
+# Ignore coverage reports
+coverage/
+
+# Ignore macOS and Windows trash
+*.swp
+Thumbs Away.iml
+Thumbs Away.code-workspace
+
