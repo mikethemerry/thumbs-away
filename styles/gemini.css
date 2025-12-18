@@ -1,0 +1,47 @@
+/*
+ * Gemini (gemini.google.com) - Hide feedback buttons
+ */
+
+/* Gemini feedback buttons */
+button[aria-label="Good response"],
+button[aria-label="Bad response"],
+button[aria-label="Like"],
+button[aria-label="Dislike"],
+button[data-test-id="like-button"],
+button[data-test-id="dislike-button"],
+/* Gemini's mat-icon buttons for feedback */
+button:has(mat-icon[data-mat-icon-name="thumb_up"]),
+button:has(mat-icon[data-mat-icon-name="thumb_down"]),
+/* Alternative Gemini selectors */
+[data-tooltip="Good response"],
+[data-tooltip="Bad response"],
+message-actions button:has([data-icon="thumb_up"]),
+message-actions button:has([data-icon="thumb_down"]) {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Gemini response actions that include thumbs */
+.response-actions button[aria-label*="thumb"],
+.message-actions button[aria-label*="thumb"] {
+  display: none !important;
+}
+
+/* Generic thumb selectors for Gemini */
+button[aria-label*="thumb" i],
+button[aria-label*="like" i]:not([aria-label*="unlike" i]),
+button[aria-label*="dislike" i],
+button[title*="thumb" i] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Hide by SVG patterns */
+button:has(svg[data-icon="thumbs-up"]),
+button:has(svg[data-icon="thumbs-down"]),
+button:has(svg[name="thumbs-up"]),
+button:has(svg[name="thumbs-down"]) {
+  display: none !important;
+}

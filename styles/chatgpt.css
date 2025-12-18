@@ -1,0 +1,39 @@
+/*
+ * ChatGPT (chat.openai.com & chatgpt.com) - Hide feedback buttons
+ */
+
+/* ChatGPT feedback buttons */
+button[aria-label="Good response"],
+button[aria-label="Bad response"],
+button[aria-label="Thumbs up"],
+button[aria-label="Thumbs down"],
+button[data-testid="good-response-turn-action-button"],
+button[data-testid="bad-response-turn-action-button"],
+/* ChatGPT's feedback button container */
+span[data-state] button:has(svg path[d*="M12.784 3.096"]),
+span[data-state] button:has(svg path[d*="M11.216 20.904"]) {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Target the reaction buttons group in ChatGPT */
+.flex.items-center.justify-start button:has(svg[class*="icon"]):nth-child(1),
+.flex.items-center.justify-start button:has(svg[class*="icon"]):nth-child(2) {
+  display: none !important;
+}
+
+/* Generic thumb selectors for ChatGPT */
+button[aria-label*="thumb" i],
+button[aria-label*="like" i]:not([aria-label*="unlike" i]),
+button[aria-label*="dislike" i] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Hide by SVG patterns */
+button:has(svg[data-icon="thumbs-up"]),
+button:has(svg[data-icon="thumbs-down"]) {
+  display: none !important;
+}

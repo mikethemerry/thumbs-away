@@ -1,0 +1,35 @@
+/*
+ * Claude.ai - Hide feedback buttons
+ */
+
+/* Hide the feedback button group (thumbs up/down) */
+[data-testid="feedback-buttons"],
+button[aria-label="Good response"],
+button[aria-label="Bad response"],
+button[aria-label="This is a good response"],
+button[aria-label="This is a bad response"],
+/* Claude's thumb buttons container */
+.flex.items-center.gap-1 button[class*="thumb"],
+/* Target buttons with thumb icons in Claude */
+button:has(svg[class*="lucide-thumbs"]),
+button:has(svg path[d*="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2"]),
+button:has(svg path[d*="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2"]) {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Claude feedback container */
+.font-styrene button[aria-label*="response"] {
+  display: none !important;
+}
+
+/* Generic thumb selectors for Claude */
+button[aria-label*="thumb" i],
+button[title*="thumb" i],
+button[title*="Good response" i],
+button[title*="Bad response" i] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
