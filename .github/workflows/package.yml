@@ -55,13 +55,18 @@ jobs:
           # Verify package structure
           echo "Package contents:"
           find package -type f | sort
+          echo ""
+          echo "Verifying manifest.json exists:"
+          [ -f package/manifest.json ] && echo "✓ manifest.json found" || (echo "✗ manifest.json missing!" && exit 1)
 
       - name: Create zip archive
         run: |
           cd package
-          zip -r ../thumbs-away-v${{ steps.version.outputs.version }}.zip .
+          zip -r ../thumbs-away-v${{ steps.version.outputs.version }}.zip * -x "*.DS_Store"
           cd ..
           ls -lh thumbs-away-v*.zip
+          echo "Verifying zip contents:"
+          unzip -l thumbs-away-v${{ steps.version.outputs.version }}.zip | head -20
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
