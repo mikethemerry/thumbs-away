@@ -8,12 +8,20 @@ button[aria-label="Good response"],
 button[aria-label="Bad response"],
 button[aria-label="This is a good response"],
 button[aria-label="This is a bad response"],
+button[aria-label="Give positive feedback"],
+button[aria-label="Give negative feedback"],
 /* Claude's thumb buttons container */
 .flex.items-center.gap-1 button[class*="thumb"],
 /* Target buttons with thumb icons in Claude */
 button:has(svg[class*="lucide-thumbs"]),
 button:has(svg path[d*="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2"]),
-button:has(svg path[d*="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2"]) {
+button:has(svg path[d*="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2"]),
+/* New Claude SVG paths - positive feedback (thumbs up) */
+button:has(svg path[d*="M9.56055 2C11.1381"]),
+button:has(svg path[d*="12.6699 17H4.5C3.67157"]),
+/* New Claude SVG paths - negative feedback (thumbs down) */
+button:has(svg path[d*="M12.6699 3C14.2586"]),
+button:has(svg path[d*="10.7617V4.5C3 3.67157"]) {
   display: none !important;
   visibility: hidden !important;
   pointer-events: none !important;
@@ -28,7 +36,11 @@ button:has(svg path[d*="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2"]) {
 button[aria-label*="thumb" i],
 button[title*="thumb" i],
 button[title*="Good response" i],
-button[title*="Bad response" i] {
+button[title*="Bad response" i],
+button[aria-label*="positive feedback" i],
+button[aria-label*="negative feedback" i],
+button[title*="positive feedback" i],
+button[title*="negative feedback" i] {
   display: none !important;
   visibility: hidden !important;
   pointer-events: none !important;
