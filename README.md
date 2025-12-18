@@ -6,6 +6,22 @@ A Chrome extension that hides thumbs up/down feedback buttons on Claude, ChatGPT
 
 When you click feedback buttons on AI chat platforms, your conversation data may be flagged for review or included in training datasets. For business users handling sensitive information, this creates data governance risks. This extension removes those buttons entirely, eliminating the possibility of accidental clicks.
 
+### The Opt-Out Override Problem
+
+**Important**: Even if you've opted out of ChatGPT training/feedback use (i.e., turned off "Improve the model for everyone" or similar settings), pressing the 👍 (thumbs up) or 👎 (thumbs down) button still counts as **active feedback** you are choosing to provide — and it can **override your opt-out for that specific conversation**.
+
+Here's what happens:
+
+- **You are explicitly giving feedback.** Even if you've opted out of data being used for training generally, clicking thumbs up or thumbs down is a deliberate signal you choose to send. ([OpenAI Help Center][openai-help])
+- **That conversation may be used for training.** According to OpenAI's documentation, if you provide feedback on a response, **the entire conversation associated with that feedback** can be used to train models — even if you had previously opted out of training. ([OpenAI Help Center][openai-help])
+- **Pressing thumbs up = giving consent for training on that session.** Opting out normally stops most conversations from being used for model improvement, but actively rating an answer signals you *do* want OpenAI to use that interaction. ([CarlosPérez][carlosperez])
+- **If you want privacy for a whole conversation, avoid feedback clicks.** Don't click thumbs up/down if you want the entire chat to stay out of training datasets. ([CarlosPérez][carlosperez])
+
+**In short**: Even with training opt-out enabled, pressing the thumbs up/down button opts **that specific conversation** back into potential use for training and feedback analysis. Your opt-out still applies to chats where you *don't* actively give feedback. ([OpenAI Help Center][openai-help])
+
+[openai-help]: https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance%3F.ppt?utm_source=chatgpt.com "How your data is used to improve model performance | OpenAI Help Center"
+[carlosperez]: https://carlosperez.io/how-to-disable-training-on-my-data-in-chatgpt-an-overview-on-openais-privacy-policy/?utm_source=chatgpt.com "How to disable training on my data in ChatGPT: An overview on OpenAI's privacy policy - CarlosPérez"
+
 ## Features
 
 - **Per-platform toggles** - Enable or disable hiding for each platform independently
@@ -64,6 +80,8 @@ Settings are stored in Chrome's sync storage, so they persist and sync across yo
 - `activeTab` - Apply CSS to the current tab when you change settings
 - `scripting` - Inject/remove CSS dynamically
 - Host permissions - Only for the three AI platforms, nothing else
+
+For detailed justifications of each permission, see [Permissions Documentation](./docs/PERMISSIONS.md).
 
 ## Privacy
 
