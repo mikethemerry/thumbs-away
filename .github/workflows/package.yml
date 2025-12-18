@@ -1,0 +1,79 @@
+name: Package Extension
+
+on:
+  push:
+    branches:
+      - main
+  release:
+    types: [created]
+  workflow_dispatch:
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate manifest.json
+        run: |
+          python3 -m json.tool manifest.json > /dev/null
+          echo "✓ manifest.json is valid JSON"
+
+      - name: Get version from manifest
+        id: version
+        run: |
+          VERSION=$(grep -o '"version": "[^"]*"' manifest.json | cut -d'"' -f4)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Extension version: $VERSION"
+
+      - name: Create package directory
+        run: |
+          mkdir -p package
+
+      - name: Copy extension files
+        run: |
+          # Copy all necessary files, excluding development files
+          cp manifest.json package/
+          cp background.js package/
+          cp popup.html package/
+          cp popup.js package/
+
+          # Copy icon files
+          for icon in icon*.png; do
+            [ -f "$icon" ] && cp "$icon" package/
+          done
+
+          # Copy optional files if they exist
+          [ -f LICENSE ] && cp LICENSE package/
+          [ -f PRIVACY_POLICY.md ] && cp PRIVACY_POLICY.md package/
+
+          # Copy styles directory
+          cp -r styles package/
+
+          # Verify package structure
+          echo "Package contents:"
+          find package -type f | sort
+
+      - name: Create zip archive
+        run: |
+          cd package
+          zip -r ../thumbs-away-v${{ steps.version.outputs.version }}.zip .
+          cd ..
+          ls -lh thumbs-away-v*.zip
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: thumbs-away-v${{ steps.version.outputs.version }}
+          path: thumbs-away-v${{ steps.version.outputs.version }}.zip
+          retention-days: 90
+
+      - name: Upload to release (if release)
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: thumbs-away-v${{ steps.version.outputs.version }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
